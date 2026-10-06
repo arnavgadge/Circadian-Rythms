@@ -1,0 +1,41 @@
+{
+  "n_windows": 48,
+  "disagreement_minutes_summary": {
+    "count": 48.0,
+    "mean": 10.7027585787176,
+    "std": 11.129279733183388,
+    "min": 0.23557091337877978,
+    "25%": 2.6444713833677547,
+    "50%": 6.537910117252608,
+    "75%": 16.77605152197966,
+    "max": 48.238075134252796
+  },
+  "disagreement_regime_counts": {
+    "normal": 39,
+    "moderate": 7,
+    "large": 2
+  },
+  "mean_xgb_final_weight": 0.6270833333333333,
+  "mean_state_final_weight": 0.37291666666666673,
+  "n_continuity_caps_applied": 0,
+  "final_confidence_summary": {
+    "count": 48.0,
+    "mean": 88.08333333333333,
+    "std": 4.423502671698619,
+    "min": 72.0,
+    "25%": 90.0,
+    "50%": 90.0,
+    "75%": 90.0,
+    "max": 90.0
+  },
+  "confidence_label_counts": {
+    "high": 46,
+    "moderate": 2
+  },
+  "prediction_made_counts": {
+    "true": 48
+  },
+  "xgb_mae_minutes": 8.672259763300767,
+  "fused_mae_minutes": 7.090676576300744,
+  "mae_improvement_minutes": 1.5815831870000228
+}

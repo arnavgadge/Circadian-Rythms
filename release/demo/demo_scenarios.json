@@ -1,0 +1,50 @@
+{
+  "database_path": "E:\\Projects\\Circadian Rythms\\data\\demo.db",
+  "generation_seed": 777,
+  "candidate_population_size": 40,
+  "days_per_participant": 42,
+  "scenarios": {
+    "NORMAL": {
+      "participant_id": 1,
+      "source": "naturally_selected_from_population",
+      "observed_status": {
+        "pipeline_status": "SUCCESS",
+        "confidence_label": "ConfidenceLabel.HIGH",
+        "confidence_score": 82.0,
+        "highest_safety_severity": null,
+        "last_date": "2026-02-15"
+      }
+    },
+    "LOW_CONFIDENCE": {
+      "participant_id": 3,
+      "source": "naturally_selected_from_population",
+      "observed_status": {
+        "pipeline_status": "SUCCESS",
+        "confidence_label": "ConfidenceLabel.MODERATE",
+        "confidence_score": 72.0,
+        "highest_safety_severity": null,
+        "last_date": "2026-02-15"
+      }
+    },
+    "MODERATE_SAFETY_FLAG": {
+      "participant_id": 25,
+      "source": "naturally_selected_from_population",
+      "observed_status": {
+        "pipeline_status": "SUCCESS",
+        "confidence_label": "ConfidenceLabel.HIGH",
+        "confidence_score": 90.0,
+        "highest_safety_severity": "MODERATE",
+        "last_date": "2026-02-15"
+      }
+    },
+    "HIGH_SAFETY_FLAG": {
+      "participant_id": 41,
+      "source": "constructed_pathological_trajectory",
+      "observed_status": "see participant's own safety_flags/circadian_labels rows in the demo DB"
+    }
+  },
+  "personalization_mature_scenario": {
+    "included": false,
+    "reason": "Optional per the Phase 18 spec. Reaching the adaptive_policy personalization phase requires ~12 weeks (42+ observations) of real intervention-logging and compliance-outcome cycles through the recommendation engine, not just behavioral history -- a materially larger seeding routine than the four required scenarios. Documented here rather than silently omitted; see docs/demo_runbook.md."
+  }
+}

@@ -1,0 +1,60 @@
+{
+  "n_participant_windows": 600,
+  "contributor_frequency_by_rank": {
+    "rank_1/evening_screen": 273,
+    "rank_1/social_jetlag": 159,
+    "rank_1/meal_timing": 91,
+    "rank_1/morning_light": 77,
+    "rank_2/evening_screen": 272,
+    "rank_2/meal_timing": 152,
+    "rank_2/social_jetlag": 121,
+    "rank_2/morning_light": 55,
+    "rank_3/meal_timing": 217,
+    "rank_3/social_jetlag": 175,
+    "rank_3/morning_light": 141,
+    "rank_3/evening_screen": 52,
+    "rank_3/exercise": 15
+  },
+  "mean_contributor_score_by_signal": {
+    "evening_screen": 72.3604360099902,
+    "exercise": 3.268732193907264,
+    "meal_timing": 45.6041363771156,
+    "morning_light": 36.67180834747914,
+    "social_jetlag": 49.67905564173074
+  },
+  "mean_phase_effect_by_signal": {
+    "evening_screen": 36.63357705320424,
+    "exercise": -0.13750040809049527,
+    "meal_timing": 21.322331980415285,
+    "morning_light": -9.6322672003145,
+    "social_jetlag": NaN
+  },
+  "mean_alignment_deficit_by_signal": {
+    "evening_screen": 38.733333333333334,
+    "exercise": NaN,
+    "meal_timing": 31.758333333333333,
+    "morning_light": 40.575,
+    "social_jetlag": 49.67905564173074
+  },
+  "direction_counts_by_signal": {
+    "evening_screen/neutral": 417,
+    "evening_screen/hurting": 154,
+    "evening_screen/opportunity_missed": 29,
+    "exercise/neutral": 600,
+    "meal_timing/neutral": 406,
+    "meal_timing/hurting": 137,
+    "meal_timing/opportunity_missed": 57,
+    "morning_light/hurting": 367,
+    "morning_light/opportunity_missed": 122,
+    "morning_light/neutral": 111,
+    "social_jetlag/hurting": 488,
+    "social_jetlag/neutral": 112
+  },
+  "top1_frequency_by_signal": {
+    "evening_screen": 273,
+    "social_jetlag": 159,
+    "meal_timing": 91,
+    "morning_light": 77
+  },
+  "anomaly_frequency_overall": 0.24833333333333332
+}

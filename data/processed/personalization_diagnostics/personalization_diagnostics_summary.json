@@ -1,0 +1,39 @@
+{
+  "phase_snapshots": {
+    "n_snapshots": 5,
+    "phase_distribution": {
+      "literature": 1,
+      "personal_ranking": 1,
+      "personal_effect": 2,
+      "adaptive_policy": 1
+    },
+    "phase_distribution_by_intervention_type": {
+      "screen": {
+        "literature": 1,
+        "personal_ranking": 1,
+        "personal_effect": 2,
+        "adaptive_policy": 1
+      }
+    }
+  },
+  "bandit_simulation": {
+    "n_rounds": 300,
+    "true_means": {
+      "morning_light": 18.0,
+      "screen_reduction": 4.0
+    },
+    "selection_counts": {
+      "morning_light": 299,
+      "screen_reduction": 1
+    },
+    "selection_frequency": {
+      "morning_light": 0.9966666666666667,
+      "screen_reduction": 0.0033333333333333335
+    },
+    "final_posterior_means": {
+      "morning_light": 17.729350848139532,
+      "screen_reduction": 4.857637733103985
+    },
+    "favors_higher_true_mean_arm": true
+  }
+}

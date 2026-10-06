@@ -1,0 +1,38 @@
+{
+  "day": 24,
+  "date": "2026-04-29",
+  "stage": "STAGE_4_RESPONSE",
+  "fused_dlmo": "23:45:49",
+  "alignment_score": 64.67575089186775,
+  "alignment_components": {
+    "sleep_consistency": 95.54634362326443,
+    "morning_light": 100.0,
+    "evening_screen": 85.0,
+    "meal_timing": 30.0,
+    "social_jetlag": 58.718966200894585
+  },
+  "contributors": [
+    {
+      "rank": 1,
+      "signal": "meal_timing",
+      "direction": "neutral",
+      "score": 88.0
+    },
+    {
+      "rank": 2,
+      "signal": "morning_light",
+      "direction": "hurting",
+      "score": 46.51764350501592
+    },
+    {
+      "rank": 3,
+      "signal": "evening_screen",
+      "direction": "neutral",
+      "score": 41.65916036845265
+    }
+  ],
+  "recommendation": "Try finishing your last meal by 10:08 PM.",
+  "confidence": "moderate",
+  "compliance_degree": 1.0,
+  "personalization_phase": "literature"
+}

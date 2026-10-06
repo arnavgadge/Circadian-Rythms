@@ -1,0 +1,15 @@
+{
+  "n_runs": 5,
+  "phase_distribution": {
+    "1": 0,
+    "2": 0,
+    "3": 4,
+    "None": 1
+  },
+  "mean_compliance_rate": 0.14285714285714285,
+  "mean_observed_dlmo_change_minutes": -61.19911944493245,
+  "mean_observed_alignment_change": 11.20000000000001,
+  "confound_frequency": 0.2,
+  "mean_absolute_error_vs_known_synthetic_ground_truth": 4.9960036108132044e-14,
+  "n_estimates_compared_to_ground_truth": 4
+}

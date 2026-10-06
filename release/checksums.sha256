@@ -1,0 +1,9 @@
+# CircadianIQ release checksums (SHA-256)
+# Regenerate with: python -m scripts.generate_checksums
+
+81f451bb4d95d2f1c3061d24fffee66a5a400e3d8e2c5acb2e393fed258ed3d7  models/xgboost_dlmo_cos_v1.pkl
+f8774325ea72692d5113aea3c012d86c9dc42a20de2f0a5cb0ca4bdcd7c7d78d  models/xgboost_dlmo_sin_v1.pkl
+e32ebaf3b887be9cd4085c0f03949076a6900d8b2c2b6fac3cb481ecc55cb501  models/model_metadata_v1.json
+b4aebb08ea79b88e008be6ffb42c76af1dcf0a42c599ffa4e44511e780427b60  requirements-lock.txt
+67cd675f6cad7f19f382fdb480807528edd99cd49b39c9d4e47e108c4fd31449  frontend/package-lock.json
+28ed97e3c52e2bafe938466c58aff62b75663812b72afa6bb7d48522cc2ea88b  release/version_manifest.json

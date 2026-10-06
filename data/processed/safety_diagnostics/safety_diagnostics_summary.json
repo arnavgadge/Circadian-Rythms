@@ -1,0 +1,17 @@
+{
+  "n_evaluations": 150,
+  "mean_confidence": 76.91993263589802,
+  "predictions_by_confidence_tier": {
+    "high": 67,
+    "moderate": 70,
+    "low": 13
+  },
+  "flag_counts_by_type": {},
+  "flags_by_chronotype": {},
+  "flags_by_personality": {},
+  "high_severity_evaluations": 0,
+  "moderate_severity_evaluations": 0,
+  "recommendation_suppression_rate": 0.0,
+  "false_positive_like_rate": 0.0,
+  "midnight_edge_case_false_drift": false
+}

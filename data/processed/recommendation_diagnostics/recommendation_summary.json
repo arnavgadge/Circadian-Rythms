@@ -1,0 +1,59 @@
+{
+  "n_participant_days": 600,
+  "primary_frequency_by_intervention": {
+    "EVENING_SCREEN_REDUCTION": 278,
+    "CONSISTENT_SLEEP_SCHEDULE": 158,
+    "EARLIER_LAST_MEAL": 86,
+    "MORNING_LIGHT_EXPOSURE": 78
+  },
+  "supporting_frequency_by_intervention": {
+    "EARLIER_LAST_MEAL": 365,
+    "EVENING_SCREEN_REDUCTION": 318,
+    "CONSISTENT_SLEEP_SCHEDULE": 275,
+    "MORNING_LIGHT_EXPOSURE": 192
+  },
+  "severity_distribution": {
+    "moderate": 247,
+    "mild": 189,
+    "severe": 101,
+    "good": 63
+  },
+  "average_graduated_target_gap": 28.596199954217894,
+  "average_feasibility": 0.4860186781093992,
+  "average_expected_improvement_minutes": 11.958857142857143,
+  "primary_by_personality": {
+    "chaotic_sleeper/EVENING_SCREEN_REDUCTION": 32,
+    "chaotic_sleeper/CONSISTENT_SLEEP_SCHEDULE": 24,
+    "chaotic_sleeper/EARLIER_LAST_MEAL": 16,
+    "consistent_early_bird/MORNING_LIGHT_EXPOSURE": 39,
+    "consistent_early_bird/EVENING_SCREEN_REDUCTION": 6,
+    "consistent_early_bird/EARLIER_LAST_MEAL": 2,
+    "consistent_early_bird/CONSISTENT_SLEEP_SCHEDULE": 1,
+    "consistent_night_owl/EVENING_SCREEN_REDUCTION": 55,
+    "consistent_night_owl/EARLIER_LAST_MEAL": 5,
+    "healthy_stable_routine/EVENING_SCREEN_REDUCTION": 42,
+    "healthy_stable_routine/MORNING_LIGHT_EXPOSURE": 39,
+    "healthy_stable_routine/EARLIER_LAST_MEAL": 9,
+    "late_eater/EARLIER_LAST_MEAL": 39,
+    "late_eater/EVENING_SCREEN_REDUCTION": 32,
+    "late_eater/CONSISTENT_SLEEP_SCHEDULE": 1,
+    "screen_heavy_user/EVENING_SCREEN_REDUCTION": 108,
+    "social_jetlag_student/CONSISTENT_SLEEP_SCHEDULE": 132,
+    "social_jetlag_student/EARLIER_LAST_MEAL": 15,
+    "social_jetlag_student/EVENING_SCREEN_REDUCTION": 3
+  },
+  "primary_by_chronotype": {
+    "early/EVENING_SCREEN_REDUCTION": 77,
+    "early/CONSISTENT_SLEEP_SCHEDULE": 44,
+    "early/MORNING_LIGHT_EXPOSURE": 30,
+    "early/EARLIER_LAST_MEAL": 11,
+    "intermediate/EVENING_SCREEN_REDUCTION": 172,
+    "intermediate/CONSISTENT_SLEEP_SCHEDULE": 97,
+    "intermediate/EARLIER_LAST_MEAL": 46,
+    "intermediate/MORNING_LIGHT_EXPOSURE": 39,
+    "late/EARLIER_LAST_MEAL": 29,
+    "late/EVENING_SCREEN_REDUCTION": 29,
+    "late/CONSISTENT_SLEEP_SCHEDULE": 17,
+    "late/MORNING_LIGHT_EXPOSURE": 9
+  }
+}

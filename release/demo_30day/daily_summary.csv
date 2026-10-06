@@ -1,0 +1,25 @@
+day,date,stage,pipeline_status,sleep_onset,screen_end,morning_light_start,last_meal,fused_dlmo,xgb_dlmo,state_dlmo,alignment_score,confidence,top_contributor,recommendation,compliance_degree,personalization_phase
+7,2026-04-12,STAGE_1_BASELINE,SUCCESS,01:45:00,01:15:00,09:45:00,22:30:00,23:47:04,00:18:49,23:30:00,68.30212823195197,low,evening_screen,Try stopping screens by 10:45 PM.,1.0,literature
+8,2026-04-13,STAGE_2_IDENTIFY,SUCCESS,02:00:00,01:30:00,09:45:00,22:45:00,00:00:32,00:17:01,23:47:04,66.82164754815125,moderate,evening_screen,Try stopping screens by 10:30 PM.,0.4676664270099102,literature
+9,2026-04-14,STAGE_2_IDENTIFY,SUCCESS,01:45:00,01:15:00,10:00:00,22:30:00,00:20:31,00:24:37,00:15:29,64.1120987178268,moderate,evening_screen,Try stopping screens by 10:46 PM.,1.0,literature
+10,2026-04-15,STAGE_2_IDENTIFY,SUCCESS,02:00:00,01:30:00,09:45:00,22:45:00,00:23:08,00:25:16,00:20:31,55.62696827152046,moderate,evening_screen,Try stopping screens by 10:33 PM.,0.31769398632632395,literature
+11,2026-04-16,STAGE_3_CHANGE,SUCCESS,01:44:00,01:15:00,09:00:00,22:41:00,00:25:38,00:24:30,00:27:01,61.48573706115252,moderate,evening_screen,Try stopping screens by 10:52 PM.,0.7835746932809747,literature
+12,2026-04-17,STAGE_3_CHANGE,SUCCESS,01:39:00,01:10:00,08:55:00,22:38:00,00:24:41,00:21:35,00:28:29,54.52962336148114,moderate,evening_screen,Try stopping screens by 10:41 PM.,0.49769005373403274,literature
+13,2026-04-18,STAGE_3_CHANGE,SUCCESS,01:34:00,01:05:00,08:50:00,22:34:00,00:27:28,00:26:49,00:28:14,55.33875211454147,moderate,evening_screen,Try stopping screens by 10:43 PM.,0.4763193879520583,literature
+14,2026-04-19,STAGE_3_CHANGE,SUCCESS,01:29:00,01:00:00,08:45:00,22:30:00,00:25:24,00:22:40,00:28:45,57.02012981224221,moderate,evening_screen,Try stopping screens by 10:46 PM.,0.4776443367177055,literature
+15,2026-04-20,STAGE_3_CHANGE,SUCCESS,01:15:00,00:55:00,08:41:00,22:26:00,00:22:51,00:21:32,00:24:28,56.183394318160076,moderate,evening_screen,Try stopping screens by 10:49 PM.,0.6440364210831429,literature
+16,2026-04-21,STAGE_3_CHANGE,SUCCESS,01:10:00,00:50:00,08:38:00,22:22:00,00:15:13,00:11:19,00:19:59,53.467769252704514,moderate,evening_screen,Try stopping screens by 10:42 PM.,0.4765840833539473,literature
+17,2026-04-22,STAGE_3_CHANGE,SUCCESS,01:05:00,00:45:00,08:34:00,22:19:00,00:15:12,00:16:53,00:13:09,52.10751649322993,moderate,evening_screen,Try stopping screens by 10:45 PM.,0.4763193879520583,literature
+18,2026-04-23,STAGE_3_CHANGE,SUCCESS,01:00:00,00:40:00,08:30:00,22:15:00,00:02:58,00:16:54,23:51:33,54.59078786490376,moderate,evening_screen,Try stopping screens by 10:48 PM.,0.4760548395623333,literature
+19,2026-04-24,STAGE_4_RESPONSE,SUCCESS,00:54:00,00:39:00,08:29:00,22:12:00,23:55:56,00:11:29,23:43:13,55.462302516016436,moderate,meal_timing,Try stopping screens by 10:51 PM.,0.4935598696215521,literature
+20,2026-04-25,STAGE_4_RESPONSE,SUCCESS,00:54:00,00:39:00,08:28:00,22:10:00,23:52:52,00:10:06,23:38:47,54.67347666688379,moderate,meal_timing,Try stopping screens by 10:52 PM.,0.4036439012654827,literature
+21,2026-04-26,STAGE_4_RESPONSE,SUCCESS,00:53:00,00:38:00,08:27:00,22:08:00,23:50:38,00:08:37,23:35:57,62.5481046349201,moderate,meal_timing,Try stopping screens by 11:00 PM.,0.417093674031915,literature
+22,2026-04-27,STAGE_4_RESPONSE,SUCCESS,00:52:00,00:37:00,08:26:00,22:05:00,23:47:36,00:04:52,23:33:28,63.607111750130024,moderate,meal_timing,Try stopping screens by 11:07 PM.,0.4168620196785084,literature
+23,2026-04-28,STAGE_4_RESPONSE,SUCCESS,00:52:00,00:37:00,08:25:00,22:03:00,23:45:32,00:03:58,23:30:28,64.36459396104328,moderate,meal_timing,Try finishing your last meal by 10:11 PM.,1.0,literature
+24,2026-04-29,STAGE_4_RESPONSE,SUCCESS,00:51:00,00:36:00,08:24:00,22:00:00,23:45:49,00:07:38,23:27:58,64.67575089186775,moderate,meal_timing,Try finishing your last meal by 10:08 PM.,1.0,literature
+25,2026-04-30,STAGE_5_STABLE,SUCCESS,00:48:00,00:33:00,08:21:00,21:56:00,23:43:38,00:04:35,23:26:30,65.48740888471569,moderate,meal_timing,Try finishing your last meal by 10:06 PM.,1.0,literature
+26,2026-05-01,STAGE_5_STABLE,SUCCESS,00:53:00,00:38:00,08:27:00,22:00:00,23:40:26,23:59:38,23:24:43,65.53000518862162,moderate,meal_timing,Try finishing your last meal by 10:03 PM.,1.0,literature
+27,2026-05-02,STAGE_5_STABLE,SUCCESS,00:47:00,00:32:00,08:20:00,21:53:00,23:38:56,23:59:21,23:22:14,68.18688674589941,moderate,meal_timing,Try finishing your last meal by 10:02 PM.,1.0,literature
+28,2026-05-03,STAGE_5_STABLE,SUCCESS,00:52:00,00:37:00,08:26:00,21:58:00,23:39:49,00:01:27,23:22:08,67.03685150446884,moderate,meal_timing,Try finishing your last meal by 9:59 PM.,1.0,literature
+29,2026-05-04,STAGE_5_STABLE,SUCCESS,00:45:00,00:30:00,08:20:00,21:51:00,23:37:15,23:56:10,23:21:46,71.2788011495235,moderate,meal_timing,Try finishing your last meal by 9:58 PM.,1.0,literature
+30,2026-05-05,STAGE_5_STABLE,SUCCESS,00:51:00,00:36:00,08:26:00,21:56:00,23:36:24,23:55:04,23:21:07,68.85210686870963,moderate,meal_timing,Try finishing your last meal by 9:56 PM.,1.0,literature

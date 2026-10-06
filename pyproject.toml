@@ -1,0 +1,9 @@
+[project]
+name = "circadianiq"
+version = "0.1.0"
+description = "Circadian rhythm alignment system: computational phase/DLMO estimation, alignment scoring, and personalized behavioral interventions."
+requires-python = ">=3.10"
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+pythonpath = ["."]

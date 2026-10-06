@@ -1,0 +1,228 @@
+/* CircadianIQ design system: scientific, calm, minimal -- deliberately
+   not a fitness-app or hospital look. Restrained palette, generous
+   whitespace, no bright "wellness green." */
+
+:root {
+  --color-bg: #f6f7fb;
+  --color-surface: #ffffff;
+  --color-surface-muted: #eef0f7;
+  --color-border: #dde1ec;
+  --color-text: #171a2b;
+  --color-text-muted: #5b607a;
+  --color-text-faint: #8b90a8;
+
+  --color-accent: #3454d1;
+  --color-accent-soft: #e8ecfc;
+  --color-accent-text: #24399e;
+
+  --color-good: #1f8a70;
+  --color-good-soft: #e2f4ef;
+  --color-moderate: #b6791a;
+  --color-moderate-soft: #fbf0dd;
+  --color-low: #b23b3b;
+  --color-low-soft: #fbe6e6;
+
+  --color-focus-ring: #3454d1;
+
+  --radius-sm: 6px;
+  --radius-md: 12px;
+  --radius-lg: 18px;
+
+  --space-1: 4px;
+  --space-2: 8px;
+  --space-3: 12px;
+  --space-4: 16px;
+  --space-5: 24px;
+  --space-6: 32px;
+  --space-7: 48px;
+
+  --font-family: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  --font-family-mono: "IBM Plex Mono", "SFMono-Regular", Consolas, monospace;
+
+  color-scheme: light;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --color-bg: #0c0f1a;
+    --color-surface: #131729;
+    --color-surface-muted: #1b2036;
+    --color-border: #262c46;
+    --color-text: #eef0fa;
+    --color-text-muted: #a8adc8;
+    --color-text-faint: #6c7291;
+
+    --color-accent: #7c93ff;
+    --color-accent-soft: #1e2650;
+    --color-accent-text: #b7c2ff;
+
+    --color-good: #4fcbab;
+    --color-good-soft: #123830;
+    --color-moderate: #e3ac4f;
+    --color-moderate-soft: #3a2c11;
+    --color-low: #e57575;
+    --color-low-soft: #3a1616;
+
+    color-scheme: dark;
+  }
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html,
+body,
+#root {
+  height: 100%;
+}
+
+body {
+  margin: 0;
+  background: var(--color-bg);
+  color: var(--color-text);
+  font-family: var(--font-family);
+  font-size: 15px;
+  line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
+}
+
+h1,
+h2,
+h3,
+h4 {
+  margin: 0;
+  font-weight: 600;
+  letter-spacing: -0.01em;
+}
+
+p {
+  margin: 0;
+}
+
+a {
+  color: var(--color-accent);
+}
+
+button,
+input,
+select {
+  font-family: inherit;
+  font-size: inherit;
+}
+
+button {
+  cursor: pointer;
+}
+
+:focus-visible {
+  outline: 2px solid var(--color-focus-ring);
+  outline-offset: 2px;
+}
+
+.visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+.card {
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-lg);
+  padding: var(--space-5);
+}
+
+.badge {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-1);
+  padding: 2px 10px;
+  border-radius: 999px;
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+  text-transform: uppercase;
+}
+
+.badge--good {
+  background: var(--color-good-soft);
+  color: var(--color-good);
+}
+
+.badge--moderate {
+  background: var(--color-moderate-soft);
+  color: var(--color-moderate);
+}
+
+.badge--low {
+  background: var(--color-low-soft);
+  color: var(--color-low);
+}
+
+.badge--neutral {
+  background: var(--color-surface-muted);
+  color: var(--color-text-muted);
+}
+
+.boundary-note {
+  font-size: 12px;
+  color: var(--color-text-faint);
+  line-height: 1.4;
+}
+
+.section-label {
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--color-text-faint);
+  margin-bottom: var(--space-2);
+}
+
+.button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-2);
+  padding: 10px 18px;
+  border-radius: var(--radius-md);
+  border: 1px solid transparent;
+  font-weight: 600;
+  font-size: 14px;
+}
+
+.button--primary {
+  background: var(--color-accent);
+  color: white;
+}
+
+.button--secondary {
+  background: var(--color-surface);
+  border-color: var(--color-border);
+  color: var(--color-text);
+}
+
+.button:disabled {
+  opacity: 0.55;
+  cursor: not-allowed;
+}
+
+.dashboard-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: var(--space-5);
+  align-items: start;
+}
+
+@media (max-width: 760px) {
+  .dashboard-grid {
+    grid-template-columns: 1fr;
+  }
+}

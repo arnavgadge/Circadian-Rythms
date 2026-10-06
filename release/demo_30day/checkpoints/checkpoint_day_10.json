@@ -1,0 +1,38 @@
+{
+  "day": 10,
+  "date": "2026-04-15",
+  "stage": "STAGE_2_IDENTIFY",
+  "fused_dlmo": "00:23:08",
+  "alignment_score": 55.62696827152046,
+  "alignment_components": {
+    "sleep_consistency": 88.24870556403786,
+    "morning_light": 25.0,
+    "evening_screen": 10.0,
+    "meal_timing": 30.0,
+    "social_jetlag": 40.356915931564316
+  },
+  "contributors": [
+    {
+      "rank": 1,
+      "signal": "evening_screen",
+      "direction": "neutral",
+      "score": 96.0
+    },
+    {
+      "rank": 2,
+      "signal": "social_jetlag",
+      "direction": "hurting",
+      "score": 59.643084068435684
+    },
+    {
+      "rank": 3,
+      "signal": "meal_timing",
+      "direction": "neutral",
+      "score": 56.12856952463643
+    }
+  ],
+  "recommendation": "Try stopping screens by 10:33 PM.",
+  "confidence": "moderate",
+  "compliance_degree": 0.31769398632632395,
+  "personalization_phase": "literature"
+}

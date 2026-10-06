@@ -1,0 +1,62 @@
+{
+  "generated_at_utc": "2026-09-09T12:28:32.064857+00:00",
+  "release_version": "v1.0.0-research-demo",
+  "reproduction_run": {
+    "database_path": "E:\\Projects\\Circadian Rythms\\data\\release_reproduction.db",
+    "participants": 12,
+    "days": 30,
+    "seed": 42,
+    "window_count_per_participant": 24,
+    "total_window_count": 288,
+    "feature_count": 68,
+    "feature_manifest_version": "1.0.0",
+    "retrained": false,
+    "diagnostics_run": true,
+    "inference_smoke_results": [
+      {
+        "participant_id": 1,
+        "target_date": "2026-02-03",
+        "status": "SUCCESS"
+      },
+      {
+        "participant_id": 2,
+        "target_date": "2026-02-03",
+        "status": "SUCCESS"
+      },
+      {
+        "participant_id": 3,
+        "target_date": "2026-02-03",
+        "status": "SUCCESS"
+      }
+    ],
+    "step_timings_seconds": {
+      "init_db": 0.88,
+      "generate_synthetic_data": 2.39,
+      "build_feature_dataset": 1.59,
+      "diagnostics_state": 8.38,
+      "diagnostics_fusion": 9.77,
+      "diagnostics_alignment": 2.39,
+      "diagnostics_contributors": 2.98,
+      "diagnostics_recommendations": 3.75
+    },
+    "total_runtime_seconds": 34.77
+  },
+  "environment": {
+    "python_version": "3.14.3 (tags/v3.14.3:323c59a, Feb  3 2026, 16:04:56) [MSC v.1944 64 bit (AMD64)]",
+    "platform": "Windows-11-10.0.26200-SP0",
+    "relevant_package_versions": {
+      "xgboost": "3.2.0",
+      "scikit-learn": "1.8.0",
+      "pandas": "3.0.1",
+      "numpy": "2.4.3",
+      "joblib": "1.5.3",
+      "fastapi": "0.115.5",
+      "sqlalchemy": "2.0.51",
+      "alembic": "1.14.0",
+      "pydantic": "2.13.3"
+    }
+  },
+  "git_commit": null,
+  "git_note": "No .git directory present in this environment at manifest-generation time; commit hash unavailable.",
+  "note": "This manifest describes a REPRODUCTION run against a disposable database (release_reproduction.db), using the default fast smoke-scale participant count. It does NOT overwrite the frozen release model artifacts in models/ unless --retrain was passed, and validated Phase 5 metrics in models/model_metadata_v1.json / release/results/ are the authoritative release numbers regardless of this run's own (different-scale) synthetic data."
+}
