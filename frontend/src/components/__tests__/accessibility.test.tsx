@@ -1,17 +1,17 @@
-import { render, screen } from "@testing-library/react";
+import { render, screen, within } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import { describe, expect, it, vi } from "vitest";
 import { MemoryRouter } from "react-router-dom";
-import { Header } from "../Header";
+import { Sidebar } from "../layout/Sidebar";
 import { BiologicalClockCard } from "../BiologicalClockCard";
 import { buildStatus } from "../../test/fixtures";
 
 // --- 20. Accessibility basics ---
 describe("accessibility", () => {
-  it("Header exposes a labeled navigation landmark reachable by keyboard", async () => {
+  it("Sidebar exposes a labeled navigation landmark reachable by keyboard", async () => {
     render(
       <MemoryRouter>
-        <Header participantId={1} devMode={false} onToggleDevMode={vi.fn()} />
+        <Sidebar participantId={1} devMode={false} onToggleDevMode={vi.fn()} />
       </MemoryRouter>,
     );
     expect(screen.getByRole("navigation", { name: /main/i })).toBeInTheDocument();
@@ -28,9 +28,23 @@ describe("accessibility", () => {
   it("Research-mode toggle is a real checkbox with an accessible label", () => {
     render(
       <MemoryRouter>
-        <Header participantId={null} devMode={false} onToggleDevMode={vi.fn()} />
+        <Sidebar participantId={null} devMode={false} onToggleDevMode={vi.fn()} />
       </MemoryRouter>,
     );
     expect(screen.getByRole("checkbox", { name: /research mode/i })).toBeInTheDocument();
+  });
+
+  it("Sidebar marks the current page and lists every participant section", () => {
+    render(
+      <MemoryRouter initialEntries={["/history/1"]}>
+        <Sidebar participantId={1} devMode={false} onToggleDevMode={vi.fn()} />
+      </MemoryRouter>,
+    );
+    const nav = screen.getByRole("navigation", { name: /main/i });
+    for (const name of ["Dashboard", "Log Behavior", "History", "Interventions"]) {
+      expect(within(nav).getByRole("link", { name })).toBeInTheDocument();
+    }
+    expect(within(nav).getByRole("link", { name: "History" })).toHaveAttribute("aria-current", "page");
+    expect(within(nav).getByRole("link", { name: "Dashboard" })).not.toHaveAttribute("aria-current");
   });
 });

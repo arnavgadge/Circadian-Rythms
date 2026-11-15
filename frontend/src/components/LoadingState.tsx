@@ -1,22 +1,20 @@
 export function LoadingState({ label = "Loading…" }: { label?: string }) {
   return (
-    <div role="status" aria-live="polite" style={{ padding: "var(--space-6)", textAlign: "center", color: "var(--color-text-muted)" }}>
+    <div role="status" aria-live="polite" className="loading">
       <span className="visually-hidden">{label}</span>
-      <div aria-hidden="true" style={{ display: "flex", justifyContent: "center", gap: 6, marginBottom: 10 }}>
-        {[0, 1, 2].map((i) => (
-          <span
-            key={i}
-            style={{
-              width: 8,
-              height: 8,
-              borderRadius: "50%",
-              background: "var(--color-accent)",
-              opacity: 0.3 + i * 0.3,
-            }}
-          />
-        ))}
-      </div>
+      <span className="loading__orbit" aria-hidden="true" />
       <span aria-hidden="true">{label}</span>
+    </div>
+  );
+}
+
+/** Placeholder lines while a secondary section loads. */
+export function SkeletonLines({ lines = 3 }: { lines?: number }) {
+  return (
+    <div aria-hidden="true" style={{ display: "flex", flexDirection: "column", gap: 10, padding: "6px 0" }}>
+      {Array.from({ length: lines }, (_, i) => (
+        <div key={i} className="skeleton-line" style={{ width: `${92 - i * 14}%` }} />
+      ))}
     </div>
   );
 }

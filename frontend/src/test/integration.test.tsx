@@ -174,18 +174,19 @@ describe("End-to-end UI flows", () => {
     expect(screen.queryByText("This week's primary focus")).not.toBeInTheDocument();
   });
 
-  // --- 7. History loading ---
-  it("loads circadian history for the trajectory chart", async () => {
+  // --- 7. History loading (the trajectory chart lives on the History page) ---
+  it("loads circadian and behavior history on the History page", async () => {
     const { calls } = installFetchMock({});
     render(
-      <MemoryRouter initialEntries={["/dashboard/1"]}>
+      <MemoryRouter initialEntries={["/history/1"]}>
         <App />
       </MemoryRouter>,
     );
 
-    await screen.findByText("Estimated Biological Clock");
+    expect(await screen.findByRole("heading", { name: "Rhythm history" })).toBeInTheDocument();
     await waitFor(() => {
-      expect(calls.some((c) => c.includes("/circadian/history"))).toBe(true);
+      expect(calls.some((c) => c.startsWith("GET") && c.includes("/circadian/history?limit=30"))).toBe(true);
+      expect(calls.some((c) => c.startsWith("GET") && c.includes("/behavior?limit=30"))).toBe(true);
     });
   });
 

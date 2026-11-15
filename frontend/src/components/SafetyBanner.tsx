@@ -1,6 +1,7 @@
 import type { RecommendationResponse, SafetySummary } from "../api/types";
 import { HIGH_SEVERITY_BODY, HIGH_SEVERITY_HEADLINE, NON_DIAGNOSTIC_STATEMENT } from "../utils/messages";
 import { flagTypeLabel } from "../utils/terminology";
+import { Icon } from "./atlas/Icon";
 
 /**
  * Renders nothing when there is no active safety flag. A MODERATE
@@ -16,30 +17,42 @@ export function SafetyBanner({ safety, recommendation }: { safety: SafetySummary
 
   if (safety.highest_severity === "HIGH") {
     return (
-      <section className="card" role="alert" aria-labelledby="safety-heading" style={{ borderColor: "var(--color-low)", background: "var(--color-low-soft)" }}>
-        <div className="badge badge--low" style={{ marginBottom: 10 }}>
-          Safety note
+      <section className="notice notice--alert" role="alert" aria-labelledby="safety-heading">
+        <span style={{ color: "var(--rust)", display: "inline-flex", paddingTop: 4 }}>
+          <Icon name="info" size={22} />
+        </span>
+        <div>
+          <div className="badge badge--low" style={{ marginBottom: 8 }}>
+            Safety note
+          </div>
+          <h3 id="safety-heading" className="notice__title">
+            {recommendation.safety_message ?? HIGH_SEVERITY_HEADLINE}
+          </h3>
+          <p style={{ marginTop: 6 }}>{HIGH_SEVERITY_BODY}</p>
+          <p className="muted" style={{ marginTop: 4 }}>
+            {recommendation.non_diagnostic_statement ?? NON_DIAGNOSTIC_STATEMENT}
+          </p>
         </div>
-        <h3 id="safety-heading" style={{ fontSize: 18 }}>
-          {recommendation.safety_message ?? HIGH_SEVERITY_HEADLINE}
-        </h3>
-        <p style={{ marginTop: 8, fontSize: 14 }}>{HIGH_SEVERITY_BODY}</p>
-        <p style={{ marginTop: 8, fontSize: 13, color: "var(--color-text-muted)" }}>
-          {recommendation.non_diagnostic_statement ?? NON_DIAGNOSTIC_STATEMENT}
-        </p>
       </section>
     );
   }
 
   return (
-    <section className="card" aria-labelledby="pattern-note-heading" style={{ background: "var(--color-moderate-soft)", borderColor: "transparent" }}>
-      <div className="badge badge--moderate" style={{ marginBottom: 10 }}>
-        Pattern note
+    <section className="notice notice--moderate" aria-labelledby="pattern-note-heading">
+      <span style={{ color: "var(--burnt)", display: "inline-flex", paddingTop: 4 }}>
+        <Icon name="info" size={20} />
+      </span>
+      <div>
+        <div className="badge badge--moderate" style={{ marginBottom: 8 }}>
+          Pattern note
+        </div>
+        <h3 id="pattern-note-heading" className="notice__title" style={{ fontSize: 17 }}>
+          {safety.flag_types.map(flagTypeLabel).join(" · ") || "An unusual pattern was noted."}
+        </h3>
+        <p className="muted" style={{ marginTop: 4 }}>
+          {NON_DIAGNOSTIC_STATEMENT}
+        </p>
       </div>
-      <h3 id="pattern-note-heading" style={{ fontSize: 16 }}>
-        {safety.flag_types.map(flagTypeLabel).join(" · ") || "An unusual pattern was noted."}
-      </h3>
-      <p style={{ marginTop: 8, fontSize: 13, color: "var(--color-text-muted)" }}>{NON_DIAGNOSTIC_STATEMENT}</p>
     </section>
   );
 }

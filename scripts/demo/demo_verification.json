@@ -1,0 +1,72 @@
+{
+  "verified_at": "2026-11-08T07:39:49+00:00",
+  "database": {
+    "type": "sqlite",
+    "database": "data/circadianiq.db"
+  },
+  "participant": "DEMO-001",
+  "passed": 12,
+  "failed": 0,
+  "checks": [
+    {
+      "check": "1. Exactly one DEMO-001 participant, marked synthetic",
+      "result": "PASS",
+      "evidence": "SELECT id, participant_code FROM participants WHERE participant_code='DEMO-001' -> [(9101, 'DEMO-001')]; marker='circadianiq-research-demo/DEMO-001'"
+    },
+    {
+      "check": "2. Exactly 30 daily observation dates",
+      "result": "PASS",
+      "evidence": "COUNT(daily_observations WHERE participant_id=9101) = 30; range 2026-10-05 .. 2026-11-03"
+    },
+    {
+      "check": "3. All observation rows belong to DEMO-001",
+      "result": "PASS",
+      "evidence": "distinct participant_id over those rows = [9101]"
+    },
+    {
+      "check": "4. Dates are consecutive and match the manifest",
+      "result": "PASS",
+      "evidence": "manifest 2026-10-05 .. 2026-11-03; gaps = []"
+    },
+    {
+      "check": "5. No duplicate participant/date observations",
+      "result": "PASS",
+      "evidence": "GROUP BY observation_date HAVING COUNT(*)>1 -> []"
+    },
+    {
+      "check": "6. Every observation passes the API's DailyEntryRequest validation; no core field missing",
+      "result": "PASS",
+      "evidence": "invalid=none; rows missing a core field=none"
+    },
+    {
+      "check": "8. Days 1-6 have no daily prediction rows",
+      "result": "PASS",
+      "evidence": "COUNT(circadian_labels WHERE target_date <= 2026-10-10) = 0"
+    },
+    {
+      "check": "9. Days 7-30 have persisted results (one is_latest label each, with XGBoost, state and fused DLMO)",
+      "result": "PASS",
+      "evidence": "statuses=['success'] over 24 dates; duplicate is_latest=[]; alignment_results=24, contributor_results=72, intervention_log=24"
+    },
+    {
+      "check": "7. Inference was processed chronologically",
+      "result": "PASS",
+      "evidence": "circadian_labels.computed_at strictly follows target_date order: first 2026-11-08 07:39:31, last 2026-11-08 07:39:33"
+    },
+    {
+      "check": "10. Historical state progression is intact",
+      "result": "PASS",
+      "evidence": "profile current state = 22:43 on 2026-11-03 (== day-30 fused 22:43); max |state(N) - fused(N-1)| = 43 min (state-engine cap 60); fused continuity-cap violations: none; intrinsic 21:30, adapted (latest only) 21:39"
+    },
+    {
+      "check": "11. All results retrievable through the existing API (status per date, history, behavior, interventions)",
+      "result": "PASS",
+      "evidence": "GET /status for 24 prediction dates matched DB fused DLMO; warm-up dates report no prediction; history=24, behavior=30, interventions=24; problems=none"
+    },
+    {
+      "check": "12. Existing (non-DEMO-001) data was not modified",
+      "result": "PASS",
+      "evidence": "seed run before/after fingerprint equal: True (shared tables written by the pipeline: ['training_runs']); changed since seeding: none; non-demo row counts now {'participants': 1000, 'circadian_labels': 30001, 'daily_observations': 30000}"
+    }
+  ]
+}

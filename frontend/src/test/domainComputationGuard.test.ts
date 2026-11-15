@@ -46,7 +46,18 @@ import { describe, expect, it } from "vitest";
  *    a new domain value.
  *  - ConfidenceBadge.tsx: `Math.round(confidence.score)` -- formatting.
  *  - BiologicalClockCard.tsx: no arithmetic on domain values (only
- *    string interpolation of the API's own value).
+ *    string interpolation of the API's own value). The JSX text
+ *    "(DLMO, model-based)" is matched only because of the hyphen in
+ *    the English word "model-based" -- display copy, not code.
+ *  - History.tsx: `data-label="..."` table-cell attributes (mobile
+ *    stacked-table labels) match only because of the hyphen in the
+ *    JSX attribute name `data-label`; the cell content is the API's
+ *    own value rendered verbatim (`e.alignment_score ?? "null"`).
+ *  - RhythmTimeline.tsx / BehaviorHeatmap.tsx / Interventions.tsx:
+ *    `(hour / 24) * 100`-style percentages position an API-supplied
+ *    clock time or logged duration along a track (layout only);
+ *    `Math.round(entry.compliance_degree * 100)` formats the API's
+ *    own 0-1 compliance value as a percentage.
  *
  * No genuinely suspicious computation (deriving DLMO, alignment,
  * confidence, contributor, or safety-threshold values from raw
@@ -69,6 +80,14 @@ const FILES_TO_CHECK = [
   "../components/InterventionProgress.tsx",
   "../components/TrajectoryChart.tsx",
   "../pages/Dashboard.tsx",
+  "../components/RhythmTimeline.tsx",
+  "../components/BehaviorHeatmap.tsx",
+  "../components/DevPanel.tsx",
+  "../pages/History.tsx",
+  "../pages/Interventions.tsx",
+  "../pages/ResearchDemo.tsx",
+  "../components/JourneyChart.tsx",
+  "../components/ContributorEvolution.tsx",
 ];
 
 // Domain-sounding identifiers: if an arithmetic operator appears on a
@@ -99,6 +118,8 @@ const BENIGN_LINE_PATTERNS = [
   /width\s*-|height\s*-|radius\s*\*/, // SVG layout geometry
   /compliant\.length.*observed\.length/, // JSX text fraction, not a division
   /gap|marginTop|fontSize|borderWidth/, // CSS values
+  /model-based/, // English display copy, not an operator
+  /data-label=/, // JSX attribute name containing a hyphen
 ];
 
 /** Strips string/template literals, JSX attribute string values, and

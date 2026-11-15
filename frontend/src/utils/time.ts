@@ -74,3 +74,92 @@ export function to12Hour(value: string | null | undefined): string {
   if (h12 === 0) h12 = 12;
   return `${h12}:${String(m).padStart(2, "0")} ${suffix}`;
 }
+
+/* ---------- Calendar-date display helpers (formatting only) ---------- */
+
+const MONTHS = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
+
+function pad2(n: number): string {
+  return String(n).padStart(2, "0");
+}
+
+/** Today's date in the browser's local timezone, as "YYYY-MM-DD". */
+export function todayIso(): string {
+  const d = new Date();
+  return `${d.getFullYear()}-${pad2(d.getMonth() + 1)}-${pad2(d.getDate())}`;
+}
+
+function parseIsoDate(iso: string): [number, number, number] | null {
+  const match = /^(\d{4})-(\d{2})-(\d{2})$/.exec(iso);
+  if (!match) return null;
+  return [Number(match[1]), Number(match[2]), Number(match[3])];
+}
+
+/** Shift a "YYYY-MM-DD" date by whole days (timezone-safe). */
+export function addDaysIso(iso: string, days: number): string {
+  const parts = parseIsoDate(iso);
+  if (!parts) return iso;
+  const dt = new Date(Date.UTC(parts[0], parts[1] - 1, parts[2] + days));
+  return dt.toISOString().slice(0, 10);
+}
+
+/** "2026-11-08" -> "08 Nov 2026". */
+export function formatDateLong(iso: string | null | undefined): string {
+  if (!iso) return "—";
+  const parts = parseIsoDate(iso);
+  if (!parts) return iso;
+  return `${pad2(parts[2])} ${MONTHS[parts[1] - 1]} ${parts[0]}`;
+}
+
+/** "2026-11-08" -> "08 Nov". */
+export function formatDateShort(iso: string | null | undefined): string {
+  if (!iso) return "—";
+  const parts = parseIsoDate(iso);
+  if (!parts) return iso;
+  return `${pad2(parts[2])} ${MONTHS[parts[1] - 1]}`;
+}
+
+/** Inclusive list of consecutive "YYYY-MM-DD" dates from `start` to `end`. */
+export function dateRangeIso(start: string, end: string): string[] {
+  const out: string[] = [];
+  let cursor = start;
+  for (let guard = 0; cursor <= end && guard < 400; guard += 1) {
+    out.push(cursor);
+    cursor = addDaysIso(cursor, 1);
+  }
+  return out;
+}
+
+/** 198 -> "3h 18m"; 42 -> "42 min". Display formatting of a logged duration. */
+export function formatDuration(minutes: number | null | undefined): string {
+  if (minutes === null || minutes === undefined || Number.isNaN(minutes)) return "—";
+  const total = Math.round(minutes);
+  if (total < 60) return `${total} min`;
+  const h = Math.floor(total / 60);
+  const m = total % 60;
+  return m === 0 ? `${h}h` : `${h}h ${String(m).padStart(2, "0")}m`;
+}
+
+/** An (optionally unwrapped) hour value -> "23:00"-style 24h axis label. */
+export function hourLabel(hour: number): string {
+  const wrapped = ((hour % 24) + 24) % 24;
+  const totalMinutes = Math.round(wrapped * 60) % (24 * 60);
+  return `${pad2(Math.floor(totalMinutes / 60))}:${pad2(totalMinutes % 60)}`;
+}
+
+/** An (optionally unwrapped) hour value -> "11:48 PM". */
+export function hourTo12Hour(hour: number): string {
+  return to12Hour(hourLabel(hour));
+}
+
+/** Display formatting for an API `target_display` / `actual_display`
+ * string: "HH:MM" -> "11:30 PM"; a numeric string -> rounded for
+ * reading ("30.81" -> "31"); anything else is shown as given. */
+export function formatTargetDisplay(value: string | null | undefined): string {
+  if (!value) return "—";
+  const trimmed = value.trim();
+  if (/^\d{1,2}:\d{2}$/.test(trimmed)) return to12Hour(trimmed);
+  const n = Number(trimmed);
+  if (trimmed !== "" && Number.isFinite(n)) return String(Math.round(n));
+  return value;
+}

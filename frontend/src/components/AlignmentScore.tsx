@@ -9,31 +9,48 @@ import type { AlignmentSummary } from "../api/types";
 export function AlignmentScore({ alignment }: { alignment: AlignmentSummary }) {
   const score = alignment.score;
   return (
-    <section className="card" aria-labelledby="alignment-heading">
+    <section aria-labelledby="alignment-heading">
       <div className="section-label">Alignment</div>
-      <div style={{ display: "flex", alignItems: "baseline", gap: 8 }}>
-        <h2 id="alignment-heading" style={{ fontSize: 36 }}>
-          {score !== null ? Math.round(score) : "—"}
-        </h2>
-        <span style={{ color: "var(--color-text-faint)" }}>/ 100</span>
+      <div style={{ display: "grid", gridTemplateColumns: "auto minmax(0, 1fr)", gap: 28, alignItems: "center" }}>
+        <div className="score">
+          <h2 id="alignment-heading" className="score__value">
+            {score !== null ? Math.round(score) : "—"}
+          </h2>
+          <span className="score__max">/ 100</span>
+        </div>
+        <dl style={{ margin: 0, display: "flex", flexDirection: "column", gap: 14 }}>
+          <SubScore label="Phase alignment" value={alignment.phase_score} colorVar="--teal" />
+          <SubScore label="Behavioral alignment" value={alignment.behavioral_score} colorVar="--gold" />
+        </dl>
       </div>
-      <p style={{ fontSize: 13, color: "var(--color-text-muted)", marginTop: 4 }}>
-        How closely your recent behavior matches your own estimated circadian phase -- not a general health score.
+      <p className="small muted" style={{ marginTop: 14 }}>
+        How closely your recent behavior matches your own estimated circadian phase — not a general health score.
       </p>
-
-      <dl style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 12, marginTop: 16 }}>
-        <SubScore label="Phase alignment" value={alignment.phase_score} />
-        <SubScore label="Behavioral alignment" value={alignment.behavioral_score} />
-      </dl>
     </section>
   );
 }
 
-function SubScore({ label, value }: { label: string; value: number | null }) {
+function SubScore({ label, value, colorVar }: { label: string; value: number | null; colorVar: string }) {
+  const rounded = value !== null ? Math.round(value) : null;
   return (
     <div>
-      <dt style={{ fontSize: 12, color: "var(--color-text-faint)" }}>{label}</dt>
-      <dd style={{ margin: 0, fontSize: 20, fontWeight: 600 }}>{value !== null ? Math.round(value) : "—"}</dd>
+      <div className="meter-row">
+        <dt>{label}</dt>
+        <dd style={{ margin: 0 }} className="meter-row__value">
+          <span>{rounded !== null ? rounded : "—"}</span>
+          <span>/ 100</span>
+        </dd>
+      </div>
+      <div
+        className="meter"
+        role="progressbar"
+        aria-label={`${label}: ${rounded !== null ? `${rounded} out of 100` : "no data"}`}
+        aria-valuenow={rounded ?? undefined}
+        aria-valuemin={0}
+        aria-valuemax={100}
+      >
+        <div className="meter__fill" style={{ width: `${rounded !== null ? Math.max(2, Math.min(100, rounded)) : 0}%`, background: `var(${colorVar})` }} />
+      </div>
     </div>
   );
 }

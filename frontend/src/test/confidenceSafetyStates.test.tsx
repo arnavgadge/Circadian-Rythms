@@ -188,10 +188,13 @@ describe("Confidence/safety UI states", () => {
         ],
       },
     });
-    renderDashboard();
+    render(
+      <MemoryRouter initialEntries={["/history/1"]}>
+        <App />
+      </MemoryRouter>,
+    );
 
-    expect(await screen.findByText("Progress")).toBeInTheDocument();
-    expect(screen.getByRole("img", { name: /Estimated biological clock over the selected range/i })).toBeInTheDocument();
+    expect(await screen.findByRole("img", { name: /Estimated biological clock over the selected range/i })).toBeInTheDocument();
   });
 
   // --- 8. Intervention feedback/progress rendering ---

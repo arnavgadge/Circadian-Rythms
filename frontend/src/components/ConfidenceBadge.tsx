@@ -16,11 +16,22 @@ export function ConfidenceBadge({ confidence }: { confidence: ConfidenceSummary 
   const label = confidenceLabel(confidence.label);
 
   return (
-    <span className={`badge badge--${tone}`} role="status" aria-label={`Confidence: ${label}${confidence.score !== null ? `, ${Math.round(confidence.score)} out of 100` : ""}`}>
-      {label}
-      {confidence.score !== null && (
-        <span aria-hidden="true"> · {confidence.approximate ? "~" : ""}{Math.round(confidence.score)}/100</span>
-      )}
+    <span style={{ display: "inline-flex", alignItems: "center", gap: 8 }}>
+      <span className="small muted">Confidence</span>
+      <span
+        className={`badge badge--${tone}`}
+        role="status"
+        aria-label={`Confidence: ${label}${confidence.score !== null ? `, ${Math.round(confidence.score)} out of 100` : ""}`}
+      >
+        {label}
+        {confidence.score !== null && (
+          <span aria-hidden="true" style={{ fontWeight: 500 }}>
+            {" "}
+            · {confidence.approximate ? "~" : ""}
+            {Math.round(confidence.score)}/100
+          </span>
+        )}
+      </span>
     </span>
   );
 }

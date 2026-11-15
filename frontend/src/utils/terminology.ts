@@ -90,3 +90,47 @@ export const FLAG_TYPE_LABELS: Record<string, string> = {
 export function flagTypeLabel(flagType: string): string {
   return FLAG_TYPE_LABELS[flagType] ?? flagType.replace(/_/g, " ");
 }
+
+/** Short, non-causal labels for the contributor direction pill. */
+export const DIRECTION_SHORT_LABELS: Record<string, string> = {
+  hurting: "Working against",
+  opportunity_missed: "Missed opportunity",
+  neutral: "Neutral",
+};
+
+export function directionShortLabel(direction: string | null): string | null {
+  if (!direction) return null;
+  return DIRECTION_SHORT_LABELS[direction] ?? direction.replace(/_/g, " ");
+}
+
+export const INTERVENTION_TYPE_LABELS: Record<string, string> = {
+  light: "Morning light",
+  screen: "Screen cutoff",
+  sleep: "Sleep timing",
+  meal: "Meal timing",
+  exercise: "Exercise timing",
+  caffeine: "Caffeine timing",
+};
+
+export function interventionTypeLabel(type: string | null | undefined): string {
+  if (!type) return "Intervention";
+  return INTERVENTION_TYPE_LABELS[type] ?? type.replace(/_/g, " ");
+}
+
+export const MEASUREMENT_PHASE_LABELS: Record<number, string> = {
+  1: "Observed change",
+  2: "Change compared with a similar previous period",
+  3: "Estimated personal effect",
+};
+
+export const PREDICTION_STATUS_LABELS: Record<string, string> = {
+  success: "Estimated",
+  insufficient_history: "Building history",
+  no_prediction: "No estimate",
+  failed: "Not computed",
+};
+
+export function predictionStatusLabel(status: string | null | undefined): string {
+  if (!status) return "—";
+  return PREDICTION_STATUS_LABELS[status.toLowerCase()] ?? status.replace(/_/g, " ").toLowerCase();
+}

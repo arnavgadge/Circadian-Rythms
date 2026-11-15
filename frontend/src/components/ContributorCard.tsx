@@ -1,5 +1,12 @@
 import type { ContributorSummary } from "../api/types";
-import { contributorLabel, directionLabel } from "../utils/terminology";
+import { contributorLabel, directionLabel, directionShortLabel } from "../utils/terminology";
+import { Icon, type IconName } from "./atlas/Icon";
+
+const DIRECTION_STYLE: Record<string, { icon: IconName; badge: string; color: string }> = {
+  hurting: { icon: "trend-up", badge: "badge--low", color: "var(--rust)" },
+  opportunity_missed: { icon: "plus", badge: "badge--moderate", color: "var(--burnt)" },
+  neutral: { icon: "minus", badge: "badge--neutral", color: "var(--brown)" },
+};
 
 /**
  * One ranked contributor. Uses "contributor" / "estimated effect" /
@@ -9,35 +16,35 @@ import { contributorLabel, directionLabel } from "../utils/terminology";
  * "Dashboard structure").
  */
 export function ContributorCard({ contributor }: { contributor: ContributorSummary }) {
-  return (
-    <li className="card" style={{ padding: "var(--space-4)" }}>
-      <div style={{ display: "flex", justifyContent: "space-between", alignItems: "baseline" }}>
-        <span style={{ fontWeight: 600 }}>
-          {contributor.rank}. {contributorLabel(contributor.signal)}
-        </span>
-        {contributor.contributor_score !== null && (
-          <span style={{ fontSize: 12, color: "var(--color-text-faint)" }}>score {Math.round(contributor.contributor_score)}</span>
-        )}
-      </div>
+  const style = DIRECTION_STYLE[contributor.direction ?? ""] ?? DIRECTION_STYLE.neutral;
+  const shortLabel = directionShortLabel(contributor.direction);
 
-      <dl style={{ margin: "8px 0 0", fontSize: 13, color: "var(--color-text-muted)", display: "flex", flexDirection: "column", gap: 2 }}>
-        {contributor.effect_minutes !== null && (
-          <div>
-            Estimated phase effect: <strong>{Math.abs(Math.round(contributor.effect_minutes))} min</strong>
-          </div>
-        )}
-        {contributor.alignment_deficit !== null && (
-          <div>
-            Alignment deficit: <strong>{Math.round(contributor.alignment_deficit)}</strong>
-          </div>
-        )}
-        {contributor.direction && <div>{directionLabel(contributor.direction)}</div>}
-      </dl>
+  const meta: string[] = [];
+  if (contributor.effect_minutes !== null) meta.push(`Estimated phase effect ${Math.abs(Math.round(contributor.effect_minutes))} min`);
+  if (contributor.alignment_deficit !== null) meta.push(`alignment deficit ${Math.round(contributor.alignment_deficit)}`);
+  if (contributor.contributor_score !== null) meta.push(`score ${Math.round(contributor.contributor_score)}`);
+
+  return (
+    <li className="contributor">
+      <span className="rank-marker" aria-label={`Rank ${contributor.rank}`}>
+        {String(contributor.rank).padStart(2, "0")}
+      </span>
+      <span className="contributor__name">{contributorLabel(contributor.signal)}</span>
+      {shortLabel ? (
+        <span className="contributor__direction" title={directionLabel(contributor.direction) ?? undefined}>
+          <span style={{ color: style.color, display: "inline-flex" }}>
+            <Icon name={style.icon} size={15} strokeWidth={1.8} />
+          </span>
+          <span className={`badge ${style.badge}`}>{shortLabel}</span>
+        </span>
+      ) : (
+        <span />
+      )}
+      {meta.length > 0 && <span className="contributor__meta">{meta.join(" · ")}</span>}
 
       {contributor.today_anomaly && (
         <div
-          className="badge badge--moderate"
-          style={{ marginTop: 10, display: "inline-flex" }}
+          className="anomaly-note"
           role="note"
           aria-label={`Today's pattern for ${contributorLabel(contributor.signal)} was unusual compared to your recent habit.`}
         >

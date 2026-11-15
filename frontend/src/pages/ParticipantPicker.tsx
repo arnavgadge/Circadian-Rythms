@@ -1,53 +1,111 @@
 import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
+import { ApiError, api } from "../api/client";
+import { BrandLockup } from "../components/atlas/BrandMark";
+import { Icon } from "../components/atlas/Icon";
+import { CoverLandscape, CoverOrnament, CoverSun, MoonPhases } from "../components/atlas/Illustrations";
+import { friendlyErrorMessage } from "../utils/errors";
 
 /**
- * Landing screen: load an existing participant by ID, or start
- * onboarding. No demo values are hard-coded here -- entering any
- * participant ID that already exists in the database (created via
- * onboarding, a backend diagnostic script, or the synthetic dataset)
- * loads real data through the API. See docs/ui_architecture.md
- * "Demo participant".
+ * Landing screen -- the "cover" of the atlas. Loads an existing
+ * participant by ID, or starts onboarding. The ID is checked against
+ * the existing `GET /participants/{id}` endpoint before navigating, so
+ * an unknown ID shows an inline message instead of an empty dashboard.
+ * No demo values are hard-coded here (see docs/ui_architecture.md
+ * "Demo participant").
  */
 export function ParticipantPicker() {
   const [participantId, setParticipantId] = useState("");
+  const [checking, setChecking] = useState(false);
+  const [error, setError] = useState<string | null>(null);
   const navigate = useNavigate();
 
-  function handleSubmit(event: React.FormEvent) {
+  async function handleSubmit(event: React.FormEvent) {
     event.preventDefault();
-    const id = Number(participantId);
-    if (Number.isFinite(id) && id > 0) {
+    const trimmed = participantId.trim();
+    const id = Number(trimmed);
+    if (!trimmed || !Number.isInteger(id) || id <= 0) {
+      setError("Enter a numeric participant ID, for example 1.");
+      return;
+    }
+    setError(null);
+    setChecking(true);
+    try {
+      await api.getParticipant(id);
       navigate(`/dashboard/${id}`);
+    } catch (err) {
+      setChecking(false);
+      if (err instanceof ApiError && err.status === 404) {
+        setError(`No participant with ID ${id} was found. Check the ID, or create a new profile below.`);
+      } else {
+        setError(friendlyErrorMessage(err));
+      }
     }
   }
 
   return (
-    <div className="card" style={{ maxWidth: 420, margin: "80px auto 0", textAlign: "center" }}>
-      <h1 style={{ fontSize: 24 }}>CircadianIQ</h1>
-      <p style={{ color: "var(--color-text-muted)", marginTop: 8 }}>
-        Estimated from behavioral patterns. Not a clinical measurement.
-      </p>
+    <div className="cover">
+      <CoverLandscape />
+      <Link to="/" className="cover__brand" aria-label="CircadianIQ home">
+        <BrandLockup />
+      </Link>
+      <div className="cover__ornament">
+        <CoverOrnament />
+      </div>
 
-      <form onSubmit={handleSubmit} style={{ marginTop: 24, display: "flex", flexDirection: "column", gap: 12 }}>
-        <label htmlFor="participant-id" style={{ fontSize: 13, color: "var(--color-text-muted)", textAlign: "left" }}>
-          Participant ID
-        </label>
-        <input
-          id="participant-id"
-          inputMode="numeric"
-          value={participantId}
-          onChange={(e) => setParticipantId(e.target.value)}
-          placeholder="e.g. 1"
-          style={{ padding: "10px 12px", borderRadius: "var(--radius-sm)", border: "1px solid var(--color-border)" }}
-        />
-        <button type="submit" className="button button--primary" disabled={!participantId}>
-          View dashboard
-        </button>
-      </form>
+      <main className="cover__content">
+        <CoverSun />
+        <p className="cover__eyebrow">Your biological time atlas</p>
+        <h1 className="cover__title">CircadianIQ</h1>
+        <p className="cover__subtitle">Estimate · Understand · Align</p>
+        <p className="cover__lede">A model-based view of your circadian rhythm from your daily behavior.</p>
 
-      <p style={{ marginTop: 24, fontSize: 13 }}>
-        New here? <Link to="/onboarding">Create a participant profile</Link>
-      </p>
+        <form className="cover__form" onSubmit={handleSubmit} noValidate>
+          <label htmlFor="participant-id" className="visually-hidden">
+            Participant ID
+          </label>
+          <div className="input-with-icon">
+            <Icon name="user" size={18} />
+            <input
+              id="participant-id"
+              className="input input--pill"
+              inputMode="numeric"
+              autoComplete="off"
+              value={participantId}
+              onChange={(e) => {
+                setParticipantId(e.target.value);
+                if (error) setError(null);
+              }}
+              placeholder="Participant ID (e.g. 1)"
+              aria-invalid={error ? true : undefined}
+              aria-describedby={error ? "participant-error" : undefined}
+            />
+          </div>
+          <button type="submit" className="button button--primary" style={{ minHeight: 46, fontSize: 15 }} disabled={checking}>
+            {checking ? "Opening your atlas…" : "View dashboard"}
+            {!checking && <Icon name="arrow-right" size={16} />}
+          </button>
+          {error && (
+            <p id="participant-error" className="form-message form-message--error" role="alert" style={{ justifyContent: "center" }}>
+              {error}
+            </p>
+          )}
+        </form>
+
+        <p style={{ marginTop: 22, fontSize: 14 }}>
+          New here? <Link to="/onboarding">Create a participant profile</Link>
+        </p>
+        <p style={{ marginTop: 10 }}>
+          <Link to="/demo" className="cover__demo-link">
+            30-Day Research Demo
+          </Link>
+        </p>
+        <p className="cover__disclaimer">Estimated from behavioral patterns. Not a clinical measurement.</p>
+      </main>
+
+      <div className="cover__moons">
+        <MoonPhases />
+      </div>
     </div>
   );
 }

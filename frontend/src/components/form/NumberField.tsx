@@ -4,23 +4,26 @@ interface NumberFieldProps {
   value: number | "";
   min?: number;
   max?: number;
+  step?: number;
+  placeholder?: string;
   onChange: (value: number | "") => void;
 }
 
-export function NumberField({ id, label, value, min, max, onChange }: NumberFieldProps) {
+export function NumberField({ id, label, value, min, max, step, placeholder, onChange }: NumberFieldProps) {
   return (
-    <div style={{ display: "flex", flexDirection: "column", gap: 4 }}>
-      <label htmlFor={id} style={{ fontSize: 13, color: "var(--color-text-muted)" }}>
-        {label}
-      </label>
+    <div className="field">
+      <label htmlFor={id}>{label}</label>
       <input
         id={id}
+        className="input"
         type="number"
+        inputMode="decimal"
         min={min}
         max={max}
+        step={step}
+        placeholder={placeholder}
         value={value}
         onChange={(event) => onChange(event.target.value === "" ? "" : Number(event.target.value))}
-        style={{ padding: "8px 10px", borderRadius: "var(--radius-sm)", border: "1px solid var(--color-border)", background: "var(--color-surface)", color: "var(--color-text)" }}
       />
     </div>
   );
